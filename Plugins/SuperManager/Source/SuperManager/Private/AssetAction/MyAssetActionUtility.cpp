@@ -7,6 +7,8 @@
 
 #include "EditorUtilityLibrary.h"
 #include "EditorAssetLibrary.h"
+#include "Misc/MessageDialog.h"
+
 
 void UMyAssetActionUtility::TestFunc()
 {
@@ -32,6 +34,9 @@ void UMyAssetActionUtility::DuplicateAsset(int32 numOfDuplicates)
 	if(SelectedAssetDatas.Num() <= 0)
 	{
 		UE_LOG(LogTemp, Log, TEXT("SelectedAssetData.Num() <= 0"));
+
+		// FText MsgTitle = FText::FromString(TEXT("Warning!!"));
+		// FMessageDialog::Open(EAppMsgType::Ok, FText::FromString(TEXT("No asset selected!")));
 		return;
 	}
 
@@ -41,7 +46,7 @@ void UMyAssetActionUtility::DuplicateAsset(int32 numOfDuplicates)
 	{
 		for(int32 i=0; i<numOfDuplicates;i++)
 		{
-			const FString SourceAssetPath = SelectedAssetData.ObjectPath.ToString();
+			const FString SourceAssetPath = SelectedAssetData.GetSoftObjectPath().ToString();
 			const FString NewDuplicatedName = SelectedAssetData.AssetName.ToString() + TEXT("_") + FString::FromInt(i+1);
 			
 			const FString NewPathName = FPaths::Combine( SelectedAssetData.PackagePath.ToString(),NewDuplicatedName);
