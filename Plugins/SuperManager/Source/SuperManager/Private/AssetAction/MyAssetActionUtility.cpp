@@ -22,9 +22,9 @@ void UMyAssetActionUtility::TestFunc()
 	
 }
 
-void UMyAssetActionUtility::DuplicateAsset(int32 numOfDuplicates)
+void UMyAssetActionUtility::DuplicateAsset(int32 NumOfDuplicates)
 {
-	if(numOfDuplicates <= 0)
+	if(NumOfDuplicates <= 0)
 	{
 		UE_LOG(LogTemp, Log, TEXT("numOfDuplicates <= 0"));
 		return;
@@ -44,7 +44,7 @@ void UMyAssetActionUtility::DuplicateAsset(int32 numOfDuplicates)
 
 	for (const FAssetData& SelectedAssetData:SelectedAssetDatas)
 	{
-		for(int32 i=0; i<numOfDuplicates;i++)
+		for(int32 i=0; i<NumOfDuplicates;i++)
 		{
 			const FString SourceAssetPath = SelectedAssetData.GetSoftObjectPath().ToString();
 			const FString NewDuplicatedName = SelectedAssetData.AssetName.ToString() + TEXT("_") + FString::FromInt(i+1);

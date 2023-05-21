@@ -18,5 +18,5 @@ public:
 	void TestFunc();
 
 	UFUNCTION(CallInEditor)
-	void DuplicateAsset(int32 numOfDuplicates);
+	void DuplicateAsset(int32 NumOfDuplicates);
 };
