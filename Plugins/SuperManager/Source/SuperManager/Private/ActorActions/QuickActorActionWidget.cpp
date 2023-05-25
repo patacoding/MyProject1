@@ -17,9 +17,18 @@ void UQuickActorActionWidget::MySelectAllActors()
 		return;
 	}
 
-	FString SelectedActorName = SelectedActors[0]->GetActorLabel();
 
 	UE_LOG(LogTemp, Warning, TEXT("SelectedActors.Num() = %d"), SelectedActors.Num());
+
+	for (AActor* SelectedActor:SelectedActors)
+	{
+		if(!SelectedActor) continue;
+		UE_LOG(LogTemp, Warning, TEXT("SelectedActor->GetLabelName() = %s"), *SelectedActor->GetActorLabel());
+
+		// update selection state after operation
+		// or for new created ators too
+		EditorActorSubsystem->SetActorSelectionState(SelectedActor, true);
+	}
 	
 }
 
