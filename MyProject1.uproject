@@ -36,6 +36,10 @@
 		{
 			"Name": "WebBrowserNativeProxy",
 			"Enabled": true
+		},
+		{
+			"Name": "MovieRenderPipeline",
+			"Enabled": true
 		}
 	]
 }
