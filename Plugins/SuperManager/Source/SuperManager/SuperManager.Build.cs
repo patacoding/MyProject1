@@ -28,7 +28,9 @@ public class SuperManager : ModuleRules
 		PublicDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Core", "Blutility", "UnrealEd", "EditorScriptingUtilities", "ContentBrowser"
+				"Core", "Blutility", "UnrealEd", "EditorScriptingUtilities", "ContentBrowser",
+				"LevelSequence",
+				"MovieScene"
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

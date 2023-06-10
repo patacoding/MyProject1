@@ -25,7 +25,11 @@ public:
 	 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MyEUW0")
 	bool bMark = false;
-	 
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="MyEUW0")
+	class ALevelSequenceActor* LevelSequenceActor;
+
+	
 #pragma endregion 
 	
 };
