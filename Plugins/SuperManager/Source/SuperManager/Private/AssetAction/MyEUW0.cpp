@@ -6,9 +6,9 @@
 #include "Tracks/MovieSceneEventTrack.h"
 #include "MovieSceneTrack.h"
 #include "Sections/MovieSceneEventSection.h"
-#include <LevelSequenceActor.h>
-#include <LevelSequencePlayer.h>
-#include <MovieSceneSequencePlayer.h>
+#include "LevelSequenceActor.h"
+#include "LevelSequencePlayer.h"
+#include "MovieSceneSequencePlayer.h"
 
 #include "Kismet/GameplayStatics.h"
 

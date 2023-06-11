@@ -30,7 +30,9 @@ public class SuperManager : ModuleRules
 			{
 				"Core", "Blutility", "UnrealEd", "EditorScriptingUtilities", "ContentBrowser",
 				"LevelSequence",
-				"MovieScene"
+				"MovieScene",
+				"MovieSceneTracks",
+
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -39,13 +41,16 @@ public class SuperManager : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"CoreUObject",
+				"CoreUObject", 
 				"Engine",
+				"EditorScriptingUtilities",
 				"Slate",
 				"SlateCore",
 				"Blutility",
 				"UMGEditor",
-                "UMG"
+                "UMG",
+				"MovieSceneTracks",
+
 				// ... add private dependencies that you statically link with here ...	
 			}
 			);
