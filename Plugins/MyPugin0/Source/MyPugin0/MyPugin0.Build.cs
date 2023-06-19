@@ -28,6 +28,7 @@ public class MyPugin0 : ModuleRules
 			{
 				"Core",
 				"Blutility",
+				"EditorScriptingUtilities",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
@@ -36,6 +37,8 @@ public class MyPugin0 : ModuleRules
 		PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
+				"Core",
+				"EditorScriptingUtilities",
 				"CoreUObject",
 				"Engine",
 				"Slate",

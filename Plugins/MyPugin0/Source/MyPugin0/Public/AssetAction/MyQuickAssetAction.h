@@ -17,5 +17,7 @@ class MYPUGIN0_API UMyQuickAssetAction : public UAssetActionUtility
 public:
 	UFUNCTION(CallInEditor)
 	void TestFunc0();
-	
+
+	UFUNCTION(CallInEditor)
+	void DuplicateAsset();
 };
