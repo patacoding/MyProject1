@@ -36,7 +36,10 @@ void UMyMaterialEUW::CreateMaterialTest()
 	FAssetToolsModule& AssetToolsModule = FModuleManager::LoadModuleChecked<FAssetToolsModule>(TEXT("AssetTools"));
 
 	UMaterialFactoryNew* MaterialFactory = NewObject<UMaterialFactoryNew>();
-	UObject* CreatedObject = AssetToolsModule.Get().CreateAsset(Assetname, TEXT("/Game"), UMaterial::StaticClass(), MaterialFactory);
-	
-	
+	UObject* CreatedMatObject = AssetToolsModule.Get().CreateAsset(Assetname, TEXT("/Game"), UMaterial::StaticClass(), MaterialFactory);
+
+	UMaterial* CreatedMat = Cast<UMaterial>(CreatedMatObject);
+
+	// connect socket in material editor
+	CreatedMat->PostEditChange();
 }
