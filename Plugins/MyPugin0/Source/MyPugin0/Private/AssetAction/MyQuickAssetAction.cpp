@@ -58,11 +58,14 @@ void UMyQuickAssetAction::TestFunc0()
 	AssetToolsModule.Get().FixupReferencers(RedirectorsToFixArray);
 	
 	
+}
 
-	
-	
+
+void MaterialFuction()
+{
 	
 }
+
 
 void UMyQuickAssetAction::DuplicateAsset()
 {
