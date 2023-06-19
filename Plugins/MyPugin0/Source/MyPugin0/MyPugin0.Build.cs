@@ -29,6 +29,10 @@ public class MyPugin0 : ModuleRules
 				"Core",
 				"Blutility",
 				"EditorScriptingUtilities",
+				"AssetTools",
+				"UMG",
+				"Niagara",
+				"UnrealEd",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);
