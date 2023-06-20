@@ -8,6 +8,8 @@
 #include "EditorAssetLibrary.h"
 #include "Factories/MaterialFactoryNew.h"
 
+#include "LevelEditor.h"
+
 
 void UMyMaterialEUW::CreateMaterialTest()
 {
@@ -42,4 +44,56 @@ void UMyMaterialEUW::CreateMaterialTest()
 
 	// connect socket in material editor
 	CreatedMat->PostEditChange();
+}
+
+void UMyMaterialEUW::InitLevelEditorExtension()
+{
+	FLevelEditorModule& LevelEditorModule = FModuleManager::LoadModuleChecked<FLevelEditorModule>(TEXT("LevelEditor"));
+
+	TArray<FLevelEditorModule::FLevelViewportMenuExtender_SelectedActors> LevelEditorMenuExtenders = LevelEditorModule.GetAllLevelViewportContextMenuExtenders();
+
+	LevelEditorMenuExtenders.Add(FLevelEditorModule::FLevelViewportMenuExtender_SelectedActors::CreateUObject(this, &UMyMaterialEUW::MyCustomLevelEditorMenuExtender));
+
+	
+}
+
+TSharedRef<FExtender> UMyMaterialEUW::MyCustomLevelEditorMenuExtender(const TSharedRef<FUICommandList> UICommandList, const
+	TArray<AActor*> SelectedActors)
+{
+	UE_LOG(LogTemp, Warning, TEXT("SelectedActors"));
+	TSharedRef<FExtender> MenuExtender = MakeShareable(new FExtender());
+	MenuExtender->AddMenuExtension(
+		FName("MyActorOptions"),
+		EExtensionHook::Before,
+		UICommandList,
+		FMenuExtensionDelegate::CreateUObject(this, &UMyMaterialEUW::AddLevelEditorMenuEntry)
+		);
+	
+	if(SelectedActors.Num() > 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("SelectedActors.Num() > 0"));
+		MenuExtender->AddMenuExtension(
+			FName("MyActorOptions"),
+			EExtensionHook::Before,
+			UICommandList,
+FMenuExtensionDelegate::CreateUObject(this, &UMyMaterialEUW::AddLevelEditorMenuEntry)
+			);
+	}
+	return MenuExtender;
+}
+
+void UMyMaterialEUW::AddLevelEditorMenuEntry(FMenuBuilder& MenuBuilder)
+{
+	MenuBuilder.AddMenuEntry(
+		FText::FromString(TEXT("My Custom OP 1")),
+		FText::FromString(TEXT("op1 meomoe")),
+		FSlateIcon(),
+		FExecuteAction::CreateUObject(this, &UMyMaterialEUW::OnMyMenuBtnClicked)
+		);
+}
+
+
+void UMyMaterialEUW::OnMyMenuBtnClicked()
+{
+	UE_LOG(LogTemp, Warning, TEXT("OnMyMenuBtnClicked"));
 }

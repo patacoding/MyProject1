@@ -20,5 +20,15 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category="My Mat EUW")
 	FString MatName = TEXT("M_");
-	
+
+
+#pragma region LevelEditorMenuExtension
+
+	void InitLevelEditorExtension();
+	TSharedRef<FExtender> MyCustomLevelEditorMenuExtender(const TSharedRef<FUICommandList> UICommandList, const TArray<AActor*> SelectedActors);
+
+	void AddLevelEditorMenuEntry(class FMenuBuilder& MenuBuilder);
+	void OnMyMenuBtnClicked();
+
+#pragma endregion 
 };
