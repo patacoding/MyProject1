@@ -10,6 +10,17 @@
 
 #include "LevelEditor.h"
 
+#include "LevelSequenceActor.h"
+#include "MovieSceneSequencePlayer.h"
+#include "Kismet/GameplayStatics.h"
+
+#include "Editor/MovieSceneTools/Public/KeyframeTrackEditor.h"
+#include "LevelSequence.h"
+#include "MovieScene.h"
+#include "MovieSceneTrack.h"
+#include "MovieSceneSection.h"
+#include "Tracks/MovieScene3DTransformTrack.h"
+
 
 void UMyMaterialEUW::CreateMaterialTest()
 {
@@ -97,3 +108,59 @@ void UMyMaterialEUW::OnMyMenuBtnClicked()
 {
 	UE_LOG(LogTemp, Warning, TEXT("OnMyMenuBtnClicked"));
 }
+
+void UMyMaterialEUW::TestKeyFrame()
+{
+	UE_LOG(LogTemp, Warning, TEXT("TestKeyFrame"));
+
+	TArray<AActor*> sequences;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALevelSequenceActor::StaticClass(), sequences);
+
+	UE_LOG(LogTemp, Display, TEXT("sequences.Num() = %d"), sequences.Num());
+
+
+	auto* sequence = sequences[0];
+
+	auto* movieScene;
+
+	static const FName s_transformTrackName(TEXT("Transform"));
+
+	// Every object should have only one transform track
+	const UMovieScene3DTransformTrack* transformTrack = movieScene->FindTrack<UMovieScene3DTransformTrack>(bindingId.GetGuid(), s_transformTrackName);
+	check(transformTrack);
+
+	const TArray<UMovieSceneSection*>& trackSections = transformTrack->GetAllSections();
+	check(trackSections.Num() > 0);
+
+	// Take the 1st section since we are getting initial transform
+	const UMovieSceneSection* section0 = trackSections[0];
+	const FMovieSceneChannelProxy& channelProxy = section0->GetChannelProxy();
+	auto channelArray = channelProxy.GetChannels<FMovieSceneFloatChannel>();
+
+	// Assuming order: Translation X 3 -> Rotation X 3 -> Scale X 3
+	const int32 translationStartIndex = 0;
+	const int32 rotationStartIndex = 3;
+	const int32 scaleStartIndex = 6;
+
+	FVector initialTranslation = FVector::ZeroVector;
+	FVector initialRotationVec = FVector::ZeroVector;
+	FVector initialScale = FVector::OneVector;
+
+	int32 numOfTransformChannels = channelArray.Num() - 1; // Exclude weight channel
+
+	for (int32 channelIndex = 0; channelIndex < numOfTransformChannels; channelIndex++)
+	{
+		const FMovieSceneFloatChannel* channel = channelArray[channelIndex];
+
+		float channelValue = 0.0f;
+		bool result = channel->Evaluate(FFrameTime(0), channelValue);
+		check(result);
+
+
+	
+	
+	
+}
+
+
+

@@ -33,6 +33,10 @@ public class MyPugin0 : ModuleRules
 				"UMG",
 				"Niagara",
 				"UnrealEd",
+				"ContentBrowser",
+				"MovieScene",
+				"LevelSequence",
+				"MovieSceneTracks",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

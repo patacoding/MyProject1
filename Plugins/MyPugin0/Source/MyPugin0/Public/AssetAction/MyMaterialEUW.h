@@ -30,5 +30,12 @@ public:
 	void AddLevelEditorMenuEntry(class FMenuBuilder& MenuBuilder);
 	void OnMyMenuBtnClicked();
 
-#pragma endregion 
+#pragma endregion
+
+#pragma region KeyFrameOperation
+	UFUNCTION(BlueprintCallable)
+	void TestKeyFrame();
+	
+#pragma endregion
+	
 };
