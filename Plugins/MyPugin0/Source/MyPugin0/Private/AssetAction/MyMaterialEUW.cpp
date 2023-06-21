@@ -22,6 +22,8 @@
 #include "Tracks/MovieScene3DTransformTrack.h"
 #include "Tracks/MovieSceneFloatTrack.h"
 #include "Sections/MovieSceneFloatSection.h"
+#include "Sections/MovieSceneEventSection.h"
+#include "Tracks/MovieSceneEventTrack.h"
 
 
 void UMyMaterialEUW::CreateMaterialTest()
@@ -137,9 +139,14 @@ void UMyMaterialEUW::TestKeyFrame()
 	
 	// get guid of actor
 	FGuid Guid = FoundActors[77]->GetActorGuid();
-
 	UE_LOG(LogTemp, Warning, TEXT("Guid %s"), *Guid.ToString());
+
+	// Fetch blueprint and add as spawnable in sequence
+	UObject* myBlueprintObject = UEditorAssetLibrary::LoadAsset("/Game/BP_myactor1");
+	FGuid mySpanwableGuid = myMovieSceneSequence->CreateSpawnable(myBlueprintObject);
 	
+	// try to add event track for specific actor
+	UMovieSceneTrack* myTrack = myMovieScene->AddTrack(UMovieSceneEventTrack::StaticClass(), mySpanwableGuid);
 
 	// // UMovieSceneTrack* MovieSceneTrack = myMovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
 	static const FName s_transformTrackName(TEXT("Transform"));
