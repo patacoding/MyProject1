@@ -132,6 +132,7 @@ void UMyMaterialEUW::TestKeyFrame()
 	// }
 
 	UE_LOG(LogTemp, Warning, TEXT("actor 70 name %s"), *FoundActors[70]->GetName());
+	
 	// get guid of actor
 	// FGuid Guid = FoundActors[0]->GetUniqueID();
 	// UMovieSceneTrack* MovieSceneTrack = myMovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
