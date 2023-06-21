@@ -37,6 +37,7 @@ public class MyPugin0 : ModuleRules
 				"MovieScene",
 				"LevelSequence",
 				"MovieSceneTracks",
+				"Sequencer",
 				// ... add other public dependencies that you statically link with here ...
 			}
 			);

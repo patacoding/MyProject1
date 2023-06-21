@@ -112,14 +112,6 @@ void UMyMaterialEUW::OnMyMenuBtnClicked()
 void UMyMaterialEUW::TestKeyFrame()
 {
 	UE_LOG(LogTemp, Warning, TEXT("TestKeyFrame"));
-
-	TArray<AActor*> sequences;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ALevelSequenceActor::StaticClass(), sequences);
-
-	UE_LOG(LogTemp, Display, TEXT("sequences.Num() = %d"), sequences.Num());
-
-	
-	
 }
 
 
