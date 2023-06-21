@@ -111,35 +111,35 @@ void UMyMaterialEUW::OnMyMenuBtnClicked()
 
 void UMyMaterialEUW::TestKeyFrame()
 {
-	UE_LOG(LogTemp, Warning, TEXT("TestKeyFrame"));
-
-	// add position animation into level sequencer
-	// get level sequencer
-	ULevelSequence* LevelSequence = Cast<ULevelSequence>(UEditorAssetLibrary::LoadAsset("/Game/NewLevelSequence2"));
-
-
+	UE_LOG(LogTemp, Warning, TEXT("TestKeyFrame1"));
 
 	
-	UEditorAssetLibrary::CheckoutAsset("/Game/NewLevelSequence2");
 	UObject* mySequenceObject = UEditorAssetLibrary::LoadAsset("/Game/NewLevelSequence2");
 	UMovieSceneSequence* myMovieSceneSequence = Cast<UMovieSceneSequence>(mySequenceObject);
 	UMovieScene* myMovieScene = myMovieSceneSequence->GetMovieScene();
 
-	
-	// get 3d transform track from movie scene
-	FGuid Guid = FGuid::NewGuid();
-	// UMovieSceneTrack* MovieSceneTrack = LevelSequence->MovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
+	//
 
-	UMovieSceneTrack* MovieSceneTrack = myMovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
+	TSubclassOf<AActor> ClassToFind = AActor::StaticClass();
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ClassToFind, FoundActors);
 
-	
+	UE_LOG(LogTemp, Warning, TEXT("FoundActors.Num() %d"), FoundActors.Num());
 
-	TArray <UMovieSceneSection*> MovieSceneSections = MovieSceneTrack->GetAllSections();
+	// for (auto Actor : FoundActors)
+	// {
+	// 	UE_LOG(LogTemp, Warning, TEXT("Actor %s"), *Actor->GetName());
+	// }
 
-	UE_LOG(LogTemp, Warning, TEXT("MovieSceneSections.Num() %d"), MovieSceneSections.Num());
+	UE_LOG(LogTemp, Warning, TEXT("actor 70 name %s"), *FoundActors[70]->GetName());
+	// get guid of actor
+	// FGuid Guid = FoundActors[0]->GetUniqueID();
+	// UMovieSceneTrack* MovieSceneTrack = myMovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
+	// UMovieScene3DTransformTrack* MovieScene3DTransformTrack = myMovieScene->AddTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
+	// UMovieSceneTrack* myTrack = myMovieScene->AddTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
+	//
+	// UMovieScene3DTransformTrack* my3DTransformTrack = Cast<UMovieScene3DTransformTrack>(myTrack);
+
 
 	
 }
-
-
-
