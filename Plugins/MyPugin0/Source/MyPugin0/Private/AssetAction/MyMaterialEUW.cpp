@@ -112,6 +112,33 @@ void UMyMaterialEUW::OnMyMenuBtnClicked()
 void UMyMaterialEUW::TestKeyFrame()
 {
 	UE_LOG(LogTemp, Warning, TEXT("TestKeyFrame"));
+
+	// add position animation into level sequencer
+	// get level sequencer
+	ULevelSequence* LevelSequence = Cast<ULevelSequence>(UEditorAssetLibrary::LoadAsset("/Game/NewLevelSequence2"));
+
+
+
+	
+	UEditorAssetLibrary::CheckoutAsset("/Game/NewLevelSequence2");
+	UObject* mySequenceObject = UEditorAssetLibrary::LoadAsset("/Game/NewLevelSequence2");
+	UMovieSceneSequence* myMovieSceneSequence = Cast<UMovieSceneSequence>(mySequenceObject);
+	UMovieScene* myMovieScene = myMovieSceneSequence->GetMovieScene();
+
+	
+	// get 3d transform track from movie scene
+	FGuid Guid = FGuid::NewGuid();
+	// UMovieSceneTrack* MovieSceneTrack = LevelSequence->MovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
+
+	UMovieSceneTrack* MovieSceneTrack = myMovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
+
+	
+
+	TArray <UMovieSceneSection*> MovieSceneSections = MovieSceneTrack->GetAllSections();
+
+	UE_LOG(LogTemp, Warning, TEXT("MovieSceneSections.Num() %d"), MovieSceneSections.Num());
+
+	
 }
 
 
