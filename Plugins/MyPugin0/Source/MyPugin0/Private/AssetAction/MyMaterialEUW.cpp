@@ -20,6 +20,8 @@
 #include "MovieSceneTrack.h"
 #include "MovieSceneSection.h"
 #include "Tracks/MovieScene3DTransformTrack.h"
+#include "Tracks/MovieSceneFloatTrack.h"
+#include "Sections/MovieSceneFloatSection.h"
 
 
 void UMyMaterialEUW::CreateMaterialTest()
@@ -142,9 +144,25 @@ void UMyMaterialEUW::TestKeyFrame()
 	// // UMovieSceneTrack* MovieSceneTrack = myMovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
 	static const FName s_transformTrackName(TEXT("Transform"));
 	
-	const UMovieScene3DTransformTrack* transformTrack = myMovieScene->FindTrack<UMovieScene3DTransformTrack>(Guid, s_transformTrackName);
+	const UMovieScene3DTransformTrack* transformTrack = myMovieScene->FindTrack<UMovieScene3DTransformTrack>(FoundActors[77]->GetActorGuid());
 	//
 
+	TArray<FMovieSceneBinding> bingdings = myMovieScene->GetBindings();
+	if(bingdings.Num() > 0)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("bingdings.Num() %d"), bingdings.Num());
+	}
+	
+
+	UMovieSceneFloatTrack* MovieSceneTrack = myMovieScene->FindTrack<UMovieSceneFloatTrack>(bingdings[0].GetObjectGuid());
+
+	if(MovieSceneTrack)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("MovieSceneTrack found"));
+	}else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("MovieSceneTrack not found"));
+	}
 
 	if (transformTrack)
 	{
