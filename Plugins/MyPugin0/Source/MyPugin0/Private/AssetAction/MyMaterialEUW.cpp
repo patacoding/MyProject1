@@ -126,22 +126,43 @@ void UMyMaterialEUW::TestKeyFrame()
 
 	UE_LOG(LogTemp, Warning, TEXT("FoundActors.Num() %d"), FoundActors.Num());
 
-	// for (auto Actor : FoundActors)
-	// {
-	// 	UE_LOG(LogTemp, Warning, TEXT("Actor %s"), *Actor->GetName());
-	// }
+	for (auto Actor : FoundActors)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("Actor %s"), *Actor->GetName());
+	}
 
-	UE_LOG(LogTemp, Warning, TEXT("actor 70 name %s"), *FoundActors[70]->GetName());
-
+	UE_LOG(LogTemp, Warning, TEXT("actor 77 name %s"), *FoundActors[77]->GetName());
 	
 	// get guid of actor
-	// FGuid Guid = FoundActors[0]->GetUniqueID();
-	// UMovieSceneTrack* MovieSceneTrack = myMovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
-	// UMovieScene3DTransformTrack* MovieScene3DTransformTrack = myMovieScene->AddTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
-	// UMovieSceneTrack* myTrack = myMovieScene->AddTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
-	//
-	// UMovieScene3DTransformTrack* my3DTransformTrack = Cast<UMovieScene3DTransformTrack>(myTrack);
+	FGuid Guid = FoundActors[77]->GetActorGuid();
 
+	UE_LOG(LogTemp, Warning, TEXT("Guid %s"), *Guid.ToString());
+	
+
+	// // UMovieSceneTrack* MovieSceneTrack = myMovieScene->FindTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
+	static const FName s_transformTrackName(TEXT("Transform"));
+	
+	const UMovieScene3DTransformTrack* transformTrack = myMovieScene->FindTrack<UMovieScene3DTransformTrack>(Guid, s_transformTrackName);
+	//
+
+
+	if (transformTrack)
+	{
+		const TArray<UMovieSceneSection*>& trackSections = transformTrack->GetAllSections();
+		if (trackSections.Num() > 0)
+		{
+			UE_LOG(LogTemp, Warning, TEXT("trackSections.Num() %d"), trackSections.Num());
+		}
+
+	}else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("transformTrack not found"));
+	}
+
+	
+	// UMovieSceneTrack* myTrack = myMovieScene->AddTrack(UMovieScene3DTransformTrack::StaticClass(), Guid);
+	
+	// UMovieScene3DTransformTrack* my3DTransformTrack = Cast<UMovieScene3DTransformTrack>(myTrack);
 
 	
 }
