@@ -202,4 +202,8 @@ void UMyMaterialEUW::TestRunPy()
 
 	static FString Content = IPluginManager::Get().FindPlugin(TEXT("MyPugin0"))->GetContentDir();
 	UE_LOG(LogTemp, Warning, TEXT("Content %s"), *Content);
+
+	static FString PyFilePath = Content + TEXT("/BP/Python/test.py");
+	UE_LOG(LogTemp, Warning, TEXT("PyFilePath %s"), *PyFilePath);
+	
 }
