@@ -25,6 +25,8 @@
 #include "Sections/MovieSceneEventSection.h"
 #include "Tracks/MovieSceneEventTrack.h"
 
+#include "Interfaces/IPluginManager.h"
+
 
 void UMyMaterialEUW::CreateMaterialTest()
 {
@@ -190,4 +192,14 @@ void UMyMaterialEUW::TestKeyFrame()
 	// UMovieScene3DTransformTrack* my3DTransformTrack = Cast<UMovieScene3DTransformTrack>(myTrack);
 
 	
+}
+
+void UMyMaterialEUW::TestRunPy()
+{
+	// get plugins folder
+	FString pluginsDir = FPaths::ProjectPluginsDir();
+	UE_LOG(LogTemp, Warning, TEXT("pluginsDir %s"), *pluginsDir);
+
+	static FString Content = IPluginManager::Get().FindPlugin(TEXT("MyPugin0"))->GetContentDir();
+	UE_LOG(LogTemp, Warning, TEXT("Content %s"), *Content);
 }

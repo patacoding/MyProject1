@@ -35,7 +35,9 @@ public:
 #pragma region KeyFrameOperation
 	UFUNCTION(BlueprintCallable)
 	void TestKeyFrame();
-	
+
+	UFUNCTION(BlueprintCallable)
+	void TestRunPy();
 #pragma endregion
 	
 };
