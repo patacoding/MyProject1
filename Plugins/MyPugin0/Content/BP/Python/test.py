@@ -1,11 +1,6 @@
 import unreal
+import time
 
-unreal.log('Hello World!')
-
-
-@unreal.uclass()
-class PythonBridgeImplementation(unreal.PythonBridge):
-
-    @unreal.ufunction(override=True)
-    def my_function_implemented_in_python(self):
-        unreal.log_warning("Wow! This is the BEST")
+unreal.log('Hello World!' + str(time.time()))
+unreal.log_warning('Hello World!' + str(time.time()))
+unreal.log_error('Hello World!' + str(time.time()))

@@ -207,6 +207,12 @@ void UMyMaterialEUW::TestRunPy()
 	static FString PyFilePath = Content + TEXT("/BP/Python/test.py");
 	UE_LOG(LogTemp, Warning, TEXT("PyFilePath %s"), *PyFilePath);
 
+	FString CommandString = TEXT("py " + PyFilePath);
+	UE_LOG(LogTemp, Warning, TEXT("CommandString %s"), *CommandString);
+	GEngine->Exec(NULL, *CommandString);
+
+
+
 	UPythonBridge* bridge = UPythonBridge::Get();
 	if(bridge)
 	{
