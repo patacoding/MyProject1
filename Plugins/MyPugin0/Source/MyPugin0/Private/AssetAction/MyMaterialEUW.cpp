@@ -27,6 +27,7 @@
 
 #include "Interfaces/IPluginManager.h"
 
+#include "AssetAction/PythonBridge.h"
 
 void UMyMaterialEUW::CreateMaterialTest()
 {
@@ -205,5 +206,14 @@ void UMyMaterialEUW::TestRunPy()
 
 	static FString PyFilePath = Content + TEXT("/BP/Python/test.py");
 	UE_LOG(LogTemp, Warning, TEXT("PyFilePath %s"), *PyFilePath);
+
+	UPythonBridge* bridge = UPythonBridge::Get();
+	if(bridge)
+	{
+		bridge->FunctionImplementedInPython();
+	}else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("bridge not found"));
+	}
 	
 }
