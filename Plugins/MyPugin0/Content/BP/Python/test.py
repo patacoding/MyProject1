@@ -27,12 +27,17 @@ level_sequence.set_playback_end(500)
 
 actor = unreal.EditorLevelLibrary.get_selected_level_actors()[0]
 
+actor_location = actor.get_actor_location()
+actor_location = [actor_location.x, actor_location.y, actor_location.z]
+
 unreal.log(actor.get_name())
 
 actor_binding = level_sequence.add_possessable(actor)
 
 transform_track = actor_binding.add_track(unreal.MovieScene3DTransformTrack)
 transform_section = transform_track.add_section()
+
+transform_section.set_range(0, 100)
 
 # list all channels of the transform section
 for index, ch in enumerate(transform_section.get_channels()):
@@ -42,6 +47,22 @@ for index, ch in enumerate(transform_section.get_channels()):
 loc_x = transform_section.get_channels()[0]
 unreal.log(loc_x.get_name())
 
+loc_x.add_key(
+    unreal.FrameNumber(10),
+    4000.0,
+    interpolation=unreal.MovieSceneKeyInterpolation.LINEAR  # AUTO, BREAK, CONSTANT, LINEAR, USER.
+)
 
-loc_x.add_key(unreal.FrameNumber(10), 4000.0)
-loc_x.add_key(unreal.FrameNumber(20), 2000.0)
+
+loc_x.add_key(
+    unreal.FrameNumber(20),
+    6000.0,
+    interpolation=unreal.MovieSceneKeyInterpolation.LINEAR  # AUTO, BREAK, CONSTANT, LINEAR, USER.
+)
+
+
+loc_x.add_key(
+    unreal.FrameNumber(30),
+    8000.0,
+    interpolation=unreal.MovieSceneKeyInterpolation.LINEAR  # AUTO, BREAK, CONSTANT, LINEAR, USER.
+)
