@@ -9,6 +9,32 @@
 /**
  * 
  */
+
+
+class FJsonObject;
+
+USTRUCT(BlueprintType, Category="MyJsonStruct")
+struct FMyJsonStruct
+{
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="MyJsonStruct")
+	FString MyJsonStrName = "Nelson";
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="MyJsonStruct")
+	int32 MyJsonInt32 = 100;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="MyJsonStruct")
+	float MyJsonFloat = 100.0f;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category="MyJsonStruct")
+	bool MyJsonBool = true;
+	
+};
+
+
+
 UCLASS()
 class MYPUGIN0_API UMyMaterialEUW : public UEditorUtilityWidget
 {
@@ -43,5 +69,10 @@ public:
 	void TestRunPy();
 
 #pragma endregion 
-	
+
+
+#pragma region TestJson
+
+	static void WriteJson(FString JsonFilePath, TSharedPtr<FJsonObject> JsonObject, bool bOutSuccess, FString& OutInfoMessage);
+#pragma endregion
 };

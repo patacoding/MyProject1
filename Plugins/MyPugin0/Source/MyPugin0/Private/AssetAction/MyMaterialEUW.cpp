@@ -29,6 +29,8 @@
 
 #include "AssetAction/PythonBridge.h"
 
+#include "Serialization/JsonSerializer.h"
+
 void UMyMaterialEUW::CreateMaterialTest()
 {
 	// get selected assets as objects
@@ -230,5 +232,30 @@ void UMyMaterialEUW::TestRunPy()
 	{
 		UE_LOG(LogTemp, Warning, TEXT("bridge not found"));
 	}
+	
+}
+
+void UMyMaterialEUW::WriteJson(FString JsonFilePath, TSharedPtr<FJsonObject> JsonObject, bool bOutSuccess,
+	FString& OutInfoMessage)
+{
+	// try to convert json object to string, output goes in JsonString
+	FString JsonString;
+	if(!FJsonSerializer::Serialize(JsonObject.ToSharedRef(), TJsonWriterFactory<>::Create(&JsonString, 0)))
+	{
+		bOutSuccess = false;
+		OutInfoMessage = TEXT("Json serialize failed");
+		return;
+	}
+
+	// try to write json string to file
+	if(!FFileHelper::SaveStringToFile(JsonString, *JsonFilePath))
+	{
+		bOutSuccess = false;
+		OutInfoMessage = TEXT("Json write to file failed");
+		return;
+	}
+
+	bOutSuccess = true;
+	OutInfoMessage = TEXT("Json write to file success with path %s", *JsonFilePath);
 	
 }
