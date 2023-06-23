@@ -209,7 +209,15 @@ void UMyMaterialEUW::TestRunPy()
 
 	FString CommandString = TEXT("py " + PyFilePath);
 	UE_LOG(LogTemp, Warning, TEXT("CommandString %s"), *CommandString);
-	GEngine->Exec(NULL, *CommandString);
+	bool result = GEngine->Exec(NULL, *CommandString);
+	if (!result)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("command result false"));
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("command result true"));
+	}
 
 
 

@@ -1,4 +1,6 @@
-﻿#include "Engine.h"
+﻿#pragma once
+
+#include "Engine.h"
 #include "PythonBridge.generated.h"
 
 UCLASS(Blueprintable)
