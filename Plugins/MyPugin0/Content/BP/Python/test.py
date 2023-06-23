@@ -17,3 +17,31 @@ unreal.log_error('Hello World!' + str(time.time()))
 #     'Hello World for dialog!',
 #     unreal.AppMsgType.OK)
 
+
+level_sequence_asset_path = "/Game/NewLevelSequence2"
+level_sequence = unreal.load_asset(level_sequence_asset_path)
+
+# set playback range
+level_sequence.set_playback_start(0)
+level_sequence.set_playback_end(500)
+
+actor = unreal.EditorLevelLibrary.get_selected_level_actors()[0]
+
+unreal.log(actor.get_name())
+
+actor_binding = level_sequence.add_possessable(actor)
+
+transform_track = actor_binding.add_track(unreal.MovieScene3DTransformTrack)
+transform_section = transform_track.add_section()
+
+# list all channels of the transform section
+for index, ch in enumerate(transform_section.get_channels()):
+    unreal.log(index)
+    unreal.log(ch.get_name())
+
+loc_x = transform_section.get_channels()[0]
+unreal.log(loc_x.get_name())
+
+
+loc_x.add_key(unreal.FrameNumber(10), 4000.0)
+loc_x.add_key(unreal.FrameNumber(20), 2000.0)
