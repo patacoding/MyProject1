@@ -256,6 +256,6 @@ void UMyMaterialEUW::WriteJson(FString JsonFilePath, TSharedPtr<FJsonObject> Jso
 	}
 
 	bOutSuccess = true;
-	OutInfoMessage = TEXT("Json write to file success with path %s", *JsonFilePath);
+	OutInfoMessage = TEXT("Json write to file success with path");
 	
 }
