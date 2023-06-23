@@ -207,7 +207,8 @@ void UMyMaterialEUW::TestRunPy()
 	static FString PyFilePath = Content + TEXT("/BP/Python/test.py");
 	UE_LOG(LogTemp, Warning, TEXT("PyFilePath %s"), *PyFilePath);
 
-	FString CommandString = TEXT("py " + PyFilePath);
+	FString TestArg = TEXT("testargs");
+	FString CommandString = TEXT("py " + PyFilePath + " " + TestArg);
 	UE_LOG(LogTemp, Warning, TEXT("CommandString %s"), *CommandString);
 	bool result = GEngine->Exec(NULL, *CommandString);
 	if (!result)
