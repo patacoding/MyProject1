@@ -73,6 +73,5 @@ public:
 
 #pragma region TestJson
 
-	static void WriteJson(FString JsonFilePath, TSharedPtr<FJsonObject> JsonObject, bool bOutSuccess, FString& OutInfoMessage);
 #pragma endregion
 };

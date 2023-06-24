@@ -6,6 +6,7 @@
 #include "AssetToolsModule.h"
 #include "EditorUtilityLibrary.h"
 #include "EditorAssetLibrary.h"
+#include "JsonObjectConverter.h"
 #include "Factories/MaterialFactoryNew.h"
 
 #include "LevelEditor.h"
@@ -30,6 +31,8 @@
 #include "AssetAction/PythonBridge.h"
 
 #include "Serialization/JsonSerializer.h"
+
+#include "AssetAction/MyJsonUtils.h"
 
 void UMyMaterialEUW::CreateMaterialTest()
 {
@@ -223,39 +226,37 @@ void UMyMaterialEUW::TestRunPy()
 	}
 
 
+	// TODO PythonBridge not working yet
+	// UPythonBridge* bridge = UPythonBridge::Get();
+	// if(bridge)
+	// {
+	// 	bridge->FunctionImplementedInPython();
+	// }else
+	// {
+	// 	UE_LOG(LogTemp, Warning, TEXT("bridge not found"));
+	// }
 
-	UPythonBridge* bridge = UPythonBridge::Get();
-	if(bridge)
-	{
-		bridge->FunctionImplementedInPython();
-	}else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("bridge not found"));
-	}
 	
-}
+	// TODO test write json to file for memo
+	FMyJsonStruct myJsonStruct;
+	TSharedPtr<FJsonObject> MyJsonObject;
+	// if(!FJsonObjectConverter::JsonObjectToUStruct<FMyJsonStruct>(MyJsonObject.ToSharedRef(), &myJsonStruct, 0, 0))
+	// {
+	// 	UE_LOG(LogTemp, Warning, TEXT("FJsonObjectConverter::JsonObjectToUStruct failed"));
+	// }
+	//
 
-void UMyMaterialEUW::WriteJson(FString JsonFilePath, TSharedPtr<FJsonObject> JsonObject, bool bOutSuccess,
-	FString& OutInfoMessage)
-{
-	// try to convert json object to string, output goes in JsonString
-	FString JsonString;
-	if(!FJsonSerializer::Serialize(JsonObject.ToSharedRef(), TJsonWriterFactory<>::Create(&JsonString, 0)))
+
+	// json struct convert to json object and save to file
+	TSharedPtr<FJsonObject> JsonObject = FJsonObjectConverter::UStructToJsonObject(myJsonStruct);
+	if(JsonObject == nullptr)
 	{
-		bOutSuccess = false;
-		OutInfoMessage = TEXT("Json serialize failed");
+		UE_LOG(LogTemp, Warning, TEXT("JsonObject == nullptr"));
 		return;
 	}
-
-	// try to write json string to file
-	if(!FFileHelper::SaveStringToFile(JsonString, *JsonFilePath))
-	{
-		bOutSuccess = false;
-		OutInfoMessage = TEXT("Json write to file failed");
-		return;
-	}
-
-	bOutSuccess = true;
-	OutInfoMessage = TEXT("Json write to file success with path");
+	bool bOutSuccess = false;
+	FString OutputString;
+	WriteJson(TEXT("E:\\dev\\ue\\hello\\MyProject1\\Content\\test.json"), JsonObject, bOutSuccess, OutputString);
 	
+	UE_LOG(LogTemp, Warning, TEXT("OutputString %s"), *OutputString);
 }
